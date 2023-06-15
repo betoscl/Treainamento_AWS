@@ -1,0 +1,201 @@
+NACLs: Listas de controle de acesso à rede
+IAM: AWS Idenity and Access Management
+PCI Compliance: Padrão de Segurança de Dados para a Indústria de Pagamentos com Cartão
+POC: Prova de conceito
+MVP: Produto mínimo viável
+AWS Well-Architected Tool
+Throughput: Taxa de transferência
+
+__________________________________________
+AWS Cloud Valou Framework
+
+Economia de Custos Total
+Produtividade da Equipe
+Resilência Operacional
+Agilidade Empresarial
+
+Docker 
+WSL
+
+__________________________________________
+
+cd ~/.ssh/
+
+Pares de chaves: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html?icmpid=docs_ec2_console#having-ec2-create-your-key-pair
+
+Perder chave privada: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstancesConnecting.html#replacing-lost-key-pair
+
+https://497192096236.signin.aws.amazon.com/console
+
+__________________________________________
+Criar Instância comando
+
+aws ec2 run-instances --image-id ami-xxxxxxx --count 1 --instance-type t1.micro --key-name aulao-win --security-group-ids sg-xxxx --subnet-id subnet-xxxxx
+
+__________________________________________
+
+AWS Fargate
+AWS DMS
+AWS CloudTrail
+AWS Glue
+AWS CloudFront
+AWS CodeDeploy
+AWS Kinesis
+AWS CodeBuild
+
+__________________________________________
+import os
+import boto3
+
+AMI = os.environ['AMI']
+INSTANCE_TYPE = os.environ['INSTANCE_TYPE']
+KEY_NAME = os.environ['KEY_NAME']
+SUBNET_ID = os.environ['SUBNET_ID']
+
+ec2 = boto3.resource('ec2')
+
+def lambda_handler(event, context):
+	instance = ec2.create_instances(
+		ImageId = AMI,
+		InstanceType = INSTANCE_TYPE,
+		KeyName = KEY_NAME,
+		SubnetId = SUBNET_ID,
+		MaxCount = 1,
+		MinCount = 1
+	)
+
+	print("New instance created:", instance[0].id)
+
+*************************************************************
+import os
+import boto3
+
+#AMI = os.environ['AMI']
+#INSTANCE_TYPE = os.environ['INSTANCE_TYPE']
+#KEY_NAME = os.environ['KEY_NAME']
+#SUBNET_ID = os.environ['SUBNET_ID']
+
+ec2 = boto3.resource('ec2')
+
+def lambda_handler(event, context):
+	instance = ec2.create_instances(
+		ImageId = 'ami-0889a44b331db0194',
+		InstanceType = 't2.micro',
+		KeyName = 'instpython',
+		SubnetId = 'subnet-0b4d8e450b15594ff',
+		MaxCount = 1,
+		MinCount = 1
+	)
+
+	print("New instance created:", instance[0].id)
+
+___________________________________________
+AMI ami-0889a44b331db0194 ami-007855ac798b5175e
+INSTANCE_TYPE t2.micro
+KEY_NAME instpython
+SUBNET_ID subnet-0b4d8e450b15594ff
+		
+___________________________________________
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "logs:CreateLogGroup",
+            "Resource": "arn:aws:logs:us-east-1:497192096236:*"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "logs:CreateLogStream",
+                "logs:PutLogEvents"
+            ],
+            "Resource": [
+                "arn:aws:logs:us-east-1:497192096236:log-group:/aws/lambda/Create-EX2-Linux:*"
+            ]
+        }
+    ]
+}
+_____________________________________________
+
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+            "logs:CreateLogGroup",
+            "logs:CreateLogStream",
+            "logs:PutLogEvents"
+           ],
+	
+            "Resource": "arn:aws:logs:*:*:*"
+        },
+        {
+
+                "Action": [
+                "ec2:RunInstances"
+                ],
+
+            "Effect": "Allow",
+             "Resource":"*"
+            
+        }
+    ]
+}
+
+_____________________________________________
+
+Você está usando o nome de usuário incorreto para sua AMI ao se conectar à sua instância do EC2. Os nomes de usuário usuais são ec2-user, ubuntu, centos, root ou admin
+
+
+_____________________________________________
+
+CloudFormation
+https://www.youtube.com/watch?v=xfiW3u4vR7U
+
+Categorias Armazenamento
+https://aws.amazon.com/pt/s3/storage-classes/?nc=sn&loc=3
+
+_____________________________________________
+AWS CLI
+aws s3 ls
+aws s3 mb s3://nome bucket
+aws s3 rm
+aws s3 cp
+aws s3 rb s3://nome bucket
+
+_____________________________________________
+Kill chain
+
+
+_____________________________________________
+Cloud Formation
+Nod JS
+Terraform
+Python
+Ansible
+_____________________________________________
+Fortinet
+Check point apliance
+
+_____________________________________________
+Terraform commands:
+terraform init
+terraform plan
+terraform apply
+terraform destroy
+_____________________________________________
+Testes
+https://portswigger.net/
+
+_____________________________________________
+
+https://cidr.xyz/
+
+
+
+
+
+
+
