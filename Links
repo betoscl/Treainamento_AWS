@@ -3,6 +3,7 @@
     Documentação: https://developer.hashicorp.com/terraform/language
     Providers: https://registry.terraform.io/browse/providers
     Modulos: https://registry.terraform.io/browse/modules
+    Cli: https://developer.hashicorp.com/terraform/cli
  
 -Ansible
     Site: https://www.ansible.com/
